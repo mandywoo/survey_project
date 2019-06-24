@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, url_for
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 import sqlite3
 import os
 from os import path
-
 
 # from dotenv import load_dotenv
 
@@ -11,7 +10,10 @@ from os import path
 
 app = Flask(__name__)
 
-app.config.from_pyfile('/home/lainofthewired/survey/config_file.cfg')
+
+# app.config.from_pyfile('/home/lainofthewired/survey/config_file.cfg')
+app.config.from_pyfile('/home/lainofthewired/config_file.cfg')
+
 
 # project_folder = os.path.expanduser('/Users/mandywoo/Documents/survey_project')
 # load_dotenv(os.path.join(project_folder, '.env'))
@@ -94,7 +96,7 @@ def add_data_1():
                 print('error in email: ' + str(e))
         finally:
             con.close()
-            return render_template('closing.html')
+            return render_template('closing.html', custom_email=custom_email, email_password=email_password, my_email=my_email)
 
 @app.route('/addsurvey_2', methods = ['POST', 'GET'])
 def add_data_2():
