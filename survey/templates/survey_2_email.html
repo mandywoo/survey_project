@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <body>
+        <pr>
+            Relationship Survey<br>
+            This is a copy of your responses.
+        </pr>
+        <pre>
+            Name
+            {{row["first_name"]}} {{row[last_name]}}
+            Email
+            {{row["email"]}}
+            Phone
+            {{row["phone_number"]}}
+
+            Questions
+            How are you?
+            - I am great because I have you as a gf.
+            What do you think of our current relationship?
+            - It is so great and I am thankful for it everyday.
+            What are some things I can improve on as a gf?
+            - Absolutely nothing, you are perfect.
+            What are some things YOU can improve on?
+            - I can improve on being a better gf.
+            What are some things we don't do as much of anymore but you wish we did?
+            - I wish we talked more.
+            What have been your top three moments in our relationship? 
+            - I can't pick just three, every moment has been amazing.
+            What is one thing you would change about our relationship if you could?
+            - I wish we could hang out more.
+            How would you rate my:
+            Personality
+            - 10
+            Emotional well being
+            - 10
+            Cuteness
+            - 10
+            Humor
+            - 10
+            Coolness
+            - 10
+            When are you free? I wanna take you out on more dates :)
+            - {{' '.join(row["question_9"].split('T'))}}
+            Additional comments
+            - I love you :) 
+        </pre>
+    </body>
+</html>

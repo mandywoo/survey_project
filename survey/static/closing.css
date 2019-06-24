@@ -1,0 +1,33 @@
+/* background color */ 
+body {
+  background-color: #d3f4ff;
+} 
+
+/* vertically and horizontally center closing gif */
+.outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .middle {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .inner {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+/* Customize home page link */
+.home-page-link {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding-right: 10px;
+}
