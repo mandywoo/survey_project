@@ -4,6 +4,8 @@ import sqlite3
 import os
 from os import path
 
+import websiteconfig
+
 # from dotenv import load_dotenv
 
 
@@ -18,9 +20,12 @@ app.config.from_pyfile('/home/lainofthewired/config_file.cfg')
 # project_folder = os.path.expanduser('/Users/mandywoo/Documents/survey_project')
 # load_dotenv(os.path.join(project_folder, '.env'))
 
-custom_email = os.environ.get('custom_email')
-email_password = os.environ.get('email_password')
-my_email = os.environ.get('my_email')
+# custom_email = os.environ.get('custom_email')
+# email_password = os.environ.get('email_password')
+# my_email = os.environ.get('my_email')
+custom_email = websiteconfig.custom_email
+email_password = websiteconfig.email_password
+my_email = websiteconfig.my_email
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
