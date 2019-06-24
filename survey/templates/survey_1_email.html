@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <body>
+        <pr>
+            Frenship Survey<br>
+            This is a copy of your responses.
+        </pr>
+        <pre>
+            Name
+            {{row["first_name"]}} {{row[last_name]}}
+            Email
+            {{row["email"]}}
+            Phone
+            {{row["phone_number"]}}
+
+            Questions
+            How are you?
+            - I am great because I have you as a fren.
+            What do you think of our current frenship?
+            - It is so great and I am thankful for it everyday.
+            What are some things I can improve on as a fren?
+            - Absolutely nothing, you are perfect.
+            What are some things YOU can improve on?
+            - I can improve on being a better fren.
+            What is your current favorite song?
+            - Nothing, I love everything.
+            What have been your top three moments in our frenship? 
+            - I can't pick just three, every moment has been amazing.
+            What is one thing you would change about our frenship if you could?
+            - I wish we could hang out more.
+            How would you rate my:
+            Personality
+            - 10
+            Emotional well being
+            - 10
+            Humor
+            - 10
+            Coolness
+            - 10
+            When are you free? We should go out to eat some time.
+            - {{' '.join(row["question_9"].split('T'))}}
+            Additional comments
+            - This survey is bomb, I appreciate the hard work you put into making it. 
+        </pre>
+    </body>
+</html>

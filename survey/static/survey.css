@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+html,
+body {
+  background-color: #d3f4ff;
+  text-align: center;
+  font-family: 'Raleway', Helvetica, sans-serif;
+  min-width: 320px;
+}
+
+.rightTab {
+  display: inline-block;
+  text-align: right;
+  width: 48%;
+  vertical-align: middle;
+}
+
+/* put form into white box */
+.form-outer {
+    background-color: #fef5dc;
+    margin: 0 auto;
+    border-radius: 4px;
+    width: 75%;
+    max-width: 900px;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+/* Make labels and forms align */
+.labels {
+  display: inline-block;
+  text-align: right;
+  width: 40%;
+  padding: 5px;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.input-field {
+  height: 20px;
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+.input-field-textarea {
+  height: 50px;
+  width: 280px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+  resize: vertical; 
+}
+
+/* customize dropdown options */
+.dropdown {
+  height: 35px;
+  width: 140px;
+  padding: 5px;
+  margin: 10px;  
+  margin-top: 8px;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+}
+
+/* Customize radio options and its question*/
+ul {
+  list-style: none;
+}
+
+.radio {
+  display:block;  
+  text-align:left;
+  margin-left: 50px;
+}
+
+/* Hide second rating */
+#second-rating {
+  display: None;
+}
+
+/* Customize Submit Button */
+#submit {
+  background-color: #59ace0;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+
+/* Cutomize settings for screens */
+@media screen and (max-width: 833px) {
+  .input-field {
+    width: 80%;
+  }
+  select {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .labels {
+    width: 100%;
+    text-align: left;
+  }
+  .rightTab {
+    width: 80%;
+    float: left;
+  }
+  .input-field {
+    width: 80%;
+  }
+  select {
+    width: 100%;
+  }
+}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Survey_1</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='survey.css')}}" type="text/css" media="screen" charset="utf-8"/>
+    </head>
+    <body>
+        <h1>Girlfren Survey</h1>
+        <div class="form-outer">
+            <div class="container">
+                <audio hidden="true" autoplay loop controls>
+                    <source src="{{ url_for('static', filename='Ghibli_music.mp3') }}">
+                </audio>                
+                <p>
+                    Thank you for agreeing to take part in this very VERY important survey to measure the current quality 
+                    of our relationship. Please take as much time as you need to complete all the questions fully and honestly. 
+                    Be assured that I will not judge nor be hurt by any of your responses (pls be gentle) and that personal information you provide 
+                    will be kept in the strictest confidentiality. Again, I would like to remind you that honesty is the best policy. 
+                </p>
+                <form action = "{{ url_for('add_data_2') }}" method = "POST">
+                    <div class="labels">
+                        <label id="first-name-label" for="first_name">First Name: </label>
+                    </div>
+                    <input autofocus type = "text" name = "first_name" class="input-field" required/>
+
+                    <div class="labels">
+                        <label id="last-name-label" for="last_name">Last Name: </label>
+                    </div>
+                    <input type = "text" name = "last_name" class="input-field"required/>
+
+                    <div class="labels">
+                        <label id="email-label" for="email">Email: </label>
+                    </div>
+                    <input type = "email" name = "email" class="input-field" id="email" required/>
+
+                    <div class="labels">
+                            <label id="email-verification-label" for="email">Re-enter Email: </label>
+                        </div>
+                    <input type = "email" name = "email" class="input-field" id="verification-email" onblur="verifyEmail()" autocomplete="off" required/>
+
+                    <script type="text/javascript">
+                        var email = document.getElementById("email")
+                        var verification_email = document.getElementById("verification-email")
+                        function verifyEmail(){
+                            if (email.value != '' && verification_email.value != '' && email.value != verification_email.value){
+                                alert("Please enter correct email");
+                            }
+                        }
+                    </script>
+
+                    <div class='labels'>
+                        <label id='telephone-label' for="phone_number">Phone Number: </label>
+                    </div>
+                    <input type="text" name="phone_number" class="input-field" id="phoneNumber" onkeypress="return numberPressed(event);"/>
+
+                    <script>
+                        // Format the phone number as the user types it
+                        document.getElementById('phoneNumber').addEventListener('keyup',function(evt){
+                            var phoneNumber = document.getElementById('phoneNumber');
+                            var charCode = (evt.which) ? evt.which : evt.keyCode;
+                            phoneNumber.value = phoneFormat(phoneNumber.value);
+                        });
+
+                        // We need to manually format the phone number on page load
+                        document.getElementById('phoneNumber').value = phoneFormat(document.getElementById('phoneNumber').value);
+
+                        // A function to determine if the pressed key is an integer
+                        function numberPressed(evt){
+                            var charCode = (evt.which) ? evt.which : evt.keyCode;
+                            if(charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 36 || charCode > 40)){
+                                    return false;
+                            }
+                            return true;
+                        }
+
+                        // A function to format text to look like a phone number
+                        function phoneFormat(input){
+                            // Strip all characters from the input except digits
+                            input = input.replace(/\D/g,'');
+                            
+                            // Trim the remaining input to ten characters, to preserve phone number format
+                            input = input.substring(0,10);
+
+                            // Based upon the length of the string, we add formatting as necessary
+                            var size = input.length;
+                            if(size == 0){
+                                    input = input;
+                            }else if(size < 4){
+                                    input = '('+input;
+                            }else if(size < 7){
+                                    input = '('+input.substring(0,3)+') '+input.substring(3,6);
+                            }else{
+                                    input = '('+input.substring(0,3)+') '+input.substring(3,6)+' - '+input.substring(6,10);
+                            }
+                            return input; 
+                        }
+                    </script>
+
+                    <div class='labels'>
+                        <label id='q1-label' for="question_1">How are you? </label>
+                    </div>
+                    <textarea name = "question_1" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q2-label' for="question_2">What do you think of our current relationship? </label>
+                    </div>
+                    <textarea name = "question_2" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q3-label' for="question_3">What are some things I can improve on as a gf? </label>
+                    </div>
+                    <textarea name = "question_3" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q4-label' for="question_4">What are some things YOU can improve on? </label>
+                    </div>
+                    <textarea name = "question_4" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q5-label' for="question_5">What are some things we don't do as much of anymore but you wish we did? </label>
+                    </div>
+                    <textarea name = "question_5" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q6-label' for="question_6">What have been your top three moments in our relationship? </label>
+                    </div>
+                    <textarea name = "question_6" class="input-field-textarea" required></textarea>
+
+                    <div class='labels'>
+                        <label id='q7-label' for="question_7">What is one thing you would change about our relationship if you could? </label>
+                    </div>
+                    <textarea name = "question_7" class="input-field-textarea" required></textarea>
+
+                    <br>
+
+                    <div class="rating-label">How would you rate my:<br></div>
+                    <div class='labels'>
+                        <label id='q8-r1-label' for="question_8_r1">Personality </label>
+                    </div>
+                    <select name = "question_8_r1" class="dropdown" required> 
+                        <option value="" disabled selected>Select your option</option>
+                        {% for num in range(1, 11) %}
+                        <option value = "{{ num }}">{{ num }}</option>     
+                        {% endfor %}   
+                    </select>   
+                    <div class='labels'>
+                        <label id='q8-r2-label' for="question_8_r2">Emotional Well-being </label>
+                    </div>
+                    <select name = "question_8_r2" class="dropdown" required>
+                        <option value="" disabled selected>Select your option</option>
+                        {% for num in range(1, 11) %}
+                        <option value = "{{ num }}">{{ num }}</option>     
+                        {% endfor %}   
+                    </select> 
+                    <div class='labels'>
+                            <label id='q8-r3-label' for="question_8_r3">Cuteness </label>
+                        </div>
+                        <select name = "question_8_r3" class="dropdown" required>
+                            <option value="" disabled selected>Select your option</option>
+                            {% for num in range(1, 11) %}
+                            <option value = "{{ num }}">{{ num }}</option>     
+                            {% endfor %}   
+                        </select> 
+                    <div class='labels'>
+                        <label id='q8-r4-label' for="question_8_r4">Humor </label>
+                    </div>
+                    <select name = "question_8_r4" class="dropdown" required>
+                        <option value="" disabled selected>Select your option</option>
+                        {% for num in range(1, 11) %}
+                        <option value = "{{ num }}">{{ num }}</option>     
+                        {% endfor %}   
+                    </select> 
+                    <div class='labels'>
+                        <label id='q8-r5-label' for="question_8_r5">Coolness </label>
+                    </div>
+                    <select name = "question_8_r5" class="dropdown" required>
+                        <option value="" disabled selected>Select your option</option>    
+                        {% for num in range(1, 11) %}
+                        <option value = "{{ num }}">{{ num }}</option>     
+                        {% endfor %}   
+                    </select> 
+
+                    <script type="text/javascript">
+                        function ShowHideDiv() {
+                            if (document.getElementById("yes").checked || document.getElementById("no").checked){
+                                document.getElementById("second-rating").style.display="block";
+                            }
+                        }
+                    </script>
+
+                    <div class="labels">
+                        <label id='quesion-label' for="yes">Would you like to change your previous answers? </label>
+                    </div>
+                    
+                    <div class="rightTab">
+                        <ul>
+                            <li class="radio"><label><input type="radio" id="yes" name='yes' onclick="ShowHideDiv()">Yes</label></li>
+                            <li class="radio"><label><input type="radio" id="no" name='yes' onclick="ShowHideDiv()">No</label></li>
+                        </ul>
+                    </div>
+                    
+                    <br>
+
+                    <div id="second-rating">
+                        <div class="rating-label">Too bad :P How would you rate my:<br></div>
+                        <div class='labels'>
+                            <label id='q8-r1-label' for="question_8_r1">Personality </label>
+                        </div>
+                        <select name = "question_8_r1" class="dropdown" required> 
+                            <option value="" disabled selected>Select your option</option>
+                            {% for num in range(1, 100) %}
+                            <option value = "{{ num }}">10</option>     
+                            {% endfor %}   
+                        </select>   
+                        <div class='labels'>
+                            <label id='q8-r2-label' for="question_8_r2">Emotional Well-being </label>
+                        </div>
+                        <select name = "question_8_r2" class="dropdown" required>
+                            <option value="" disabled selected>Select your option</option>
+                            {% for num in range(1, 100) %}
+                            <option value = "{{ num }}">10</option>     
+                            {% endfor %}   
+                        </select> 
+                        <div class='labels'>
+                                <label id='q8-r3-label' for="question_8_r3">Cuteness </label>
+                            </div>
+                            <select name = "question_8_r3" class="dropdown" required>
+                                <option value="" disabled selected>Select your option</option>
+                                {% for num in range(1, 100) %}
+                                <option value = "{{ num }}">10</option>     
+                                {% endfor %}   
+                            </select> 
+                        <div class='labels'>
+                            <label id='q8-r4-label' for="question_8_r4">Humor </label>
+                        </div>
+                        <select name = "question_8_r4" class="dropdown" required>
+                            <option value="" disabled selected>Select your option</option>
+                            {% for num in range(1, 100) %}
+                            <option value = "{{ num }}">10</option>     
+                            {% endfor %}   
+                        </select> 
+                        <div class='labels'>
+                            <label id='q8-r5-label' for="question_8_r5">Coolness </label>
+                        </div>
+                        <select name = "question_8_r5" class="dropdown" required>
+                            <option value="" disabled selected>Select your option</option>    
+                            {% for num in range(1, 100) %}
+                            <option value = "{{ num }}">10</option>     
+                            {% endfor %}   
+                        </select> 
+                    </div>
+
+                    <script type="text/javascript">
+                        function setMinTime(){
+                            var today = new Date();
+                            var dd = today.getDate() + 1;
+                            var mm = today.getMonth() + 1; //January is 0!
+                            var yyyy = today.getFullYear();
+
+                            if(dd<10){
+                                dd='0'+dd;
+                            } 
+                            if(mm<10){
+                                mm='0'+mm;
+                            } 
+
+                            today = yyyy+'-'+mm+'-'+dd+'T'+'12:00:00.000';
+                            document.getElementById("date-time-field").setAttribute("min", today);                               
+                        }
+                    </script>
+                    
+                    <script>
+                        function validateDateTime(){
+                            var today = new Date();
+                            var dd = today.getDate() + 1;
+                            var mm = today.getMonth() + 1; //January is 0!
+                            var yyyy = today.getFullYear();
+
+                            if(dd<10){
+                                dd='0'+dd;
+                            } 
+                            if(mm<10){
+                                mm='0'+mm;
+                            } 
+
+                            today = yyyy+'-'+mm+'-'+dd+'T'+'12:00:00.000';
+                            var inputDateTime = document.getElementById("date-time-field");
+                            if (new Date(today).getTime() > new Date(inputDateTime.value).getTime()){
+                                alert("Pls put in a reasonable time and date. Meaning anytime after 12pm tomorrow...");
+                                inputDateTime.value = "";
+                            }
+                        }
+                    </script>
+
+                    <div class='labels'>
+                        <label id='q9-label' for="question_9">When are you free? I wanna take you out on more dates :) </label>
+                    </div>           
+                    <input type="datetime-local" name="question_9" class="input-field" id="date-time-field" onfocus="setMinTime(); this.onfocus=null;" onblur="validateDateTime()" required></br>
+
+
+
+                    <div class='labels'>
+                        <label id='q10-label' for="question_10">Additional comments </label>
+                    </div>           
+                    <textarea name="question_10" class="input-field-textarea" required></textarea></br>
+                    <p>
+                        You have reached the end of the survey! Your responses will be sent to your email so please 
+                        make sure to go back and ensure that the information you entered is indeed correct. 
+                        This information will be kept confidential. 
+                        <br>Disclaimer:<br>
+                        Please recognize this a joke and continue your relationship with me. Thx :) also ily <span style="color:red">&hearts;</span>
+                    </p>
+                    <input type = "submit" value = "Submit" id="submit"/><br>
+                </form>
+            </div>          
+        </div>
+        <script>
+            if(typeof jQuery=='undefined'){
+                document.write('<'+'script');
+                document.write(' language="javascript"');
+                document.write(' type="text/javascript"');
+                document.write(' src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">');
+                document.write('</'+'script'+'>')
+            }
+        </script>
+        <script>
+            if(!image_urls){
+                var image_urls=Array()
+            }
+            if(!flash_urls){
+                var flash_urls=Array()
+            }
+            image_urls['rain1']="http://www.picgifs.com/mini-graphics/mini-graphics/hearts/mini-graphics-hearts-655853.gif";
+            image_urls['rain2']="http://www.picgifs.com/mini-graphics/mini-graphics/hearts/mini-graphics-hearts-655853.gif";
+            image_urls['rain3']="http://www.picgifs.com/mini-graphics/mini-graphics/hearts/mini-graphics-hearts-655853.gif";
+            image_urls['rain4']="http://www.picgifs.com/mini-graphics/mini-graphics/hearts/mini-graphics-hearts-655853.gif";
+            $(document).ready(function(){var c=$(window).width();
+            var d=$(window).height();var e=function(a,b){return Math.round(a+(Math.random()*(b-a)))};
+            var f=function(a){setTimeout(function(){a.css({left:e(0,c)+'px',top:'-30px',display:'block',opacity:'0.'+e(10,100)}).animate({top:(d-10)+'px'},e(7500,8000),function(){$(this).fadeOut('slow',function(){f(a)})})},e(1,8000))};
+            $('<div></div>').attr('id','rainDiv')
+            .css({position:'fixed',width:(c-20)+'px',height:'1px',left:'0px',top:'-5px',display:'block'}).appendTo('body');
+            for(var i=1;i<=20;i++){var g=$('<img/>').attr('src',image_urls['rain'+e(1,4)])
+            .css({position:'absolute',left:e(0,c)+'px',top:'-30px',display:'block',opacity:'0.'+e(10,100),'margin-left':0}).addClass('rainDrop').appendTo('#rainDiv');
+            f(g);g=null};var h=0;var j=0;$(window).resize(function(){c=$(window).width();d=$(window).height()})});
+        </script>
+        <script>
+            if(typeof jQuery=='undefined'){document.write('<'+'script');
+                document.write(' language="javascript"');document.write(' type="text/javascript"');
+                document.write(' src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">');
+                document.write('</'+'script'+'>')
+            }
+        </script>
+    </body>
+</html>
