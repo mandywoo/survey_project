@@ -4,21 +4,28 @@ import sqlite3
 import os
 from os import path
 
+import websiteconfig
+
 # from dotenv import load_dotenv
 
 
 
 app = Flask(__name__)
 
+
 # app.config.from_pyfile('/home/lainofthewired/survey/config_file.cfg')
 app.config.from_pyfile('/home/lainofthewired/config_file.cfg')
+
 
 # project_folder = os.path.expanduser('/Users/mandywoo/Documents/survey_project')
 # load_dotenv(os.path.join(project_folder, '.env'))
 
-custom_email = os.environ.get('custom_email')
-email_password = os.environ.get('email_password')
-my_email = os.environ.get('my_email')
+# custom_email = os.environ.get('custom_email')
+# email_password = os.environ.get('email_password')
+# my_email = os.environ.get('my_email')
+custom_email = websiteconfig.custom_email
+email_password = websiteconfig.email_password
+my_email = websiteconfig.my_email
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -79,13 +86,14 @@ def add_data_1():
             con.rollback()
             msg = 'error in insert operation, error:' + str(e)
         else:
-            con = sqlite3.connect('database.db')
+            # con = sqlite3.connect('database.db')
+            con = sqlite3.connect("/home/lainofthewired/survey/database.db")
             con.row_factory = sqlite3.Row
             cur = con.cursor()
             cur.execute('SELECT * FROM survey_1 ORDER BY id DESC LIMIT 1')
             row = cur.fetchone()
             try:
-
+                print(custom_email)
                 send_mail('Frenship Survey Response', custom_email, [row[3]],
                             render_template('survey_1_email.html', row=row))
                 send_mail('Frenship Survey Response', custom_email, [my_email],
@@ -94,7 +102,7 @@ def add_data_1():
                 print('error in email: ' + str(e))
         finally:
             con.close()
-            return render_template('closing.html', custom_email=custom_email, email_password=email_password, my_email=my_email)
+            return render_template('closing.html')
 
 @app.route('/addsurvey_2', methods = ['POST', 'GET'])
 def add_data_2():
@@ -134,14 +142,15 @@ def add_data_2():
             con.rollback()
             msg = 'error in insert operation, error:' + str(e)
         else:
-            con = sqlite3.connect('database.db')
+            # con = sqlite3.connect('database.db')
+            con = sqlite3.connect("/home/lainofthewired/survey/database.db")
             con.row_factory = sqlite3.Row
             cur = con.cursor()
             cur.execute('SELECT * FROM survey_2 ORDER BY id DESC LIMIT 1')
             row = cur.fetchone()
-            send_mail('Frenship Survey Response', custom_email, [row[3]],
+            send_mail('Relationship Survey Response', custom_email, [row[3]],
                         render_template('survey_2_email.html', row=row))
-            send_mail('Frenship Survey Response', custom_email, [my_email],
+            send_mail('Relationship Survey Response', custom_email, [my_email],
                         render_template('my_survey_2_email.html', row=row))
         finally:
             con.close()
