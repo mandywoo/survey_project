@@ -7,42 +7,42 @@
         </pr>
         <pre>
             Name
-            {{row["first_name"]}} {{row[last_name]}}
+            {{ans_row["first_name"]}} {{ans_row[last_name]}}
             Email
-            {{row["email"]}}
+            {{ans_row["email"]}}
             Phone
-            {{row["phone_number"]}}
+            {{ans_row["phone_number"]}}
 
             Questions
-            How are you?
-            - {{row["question_1"]}}
-            What do you think of our current relationship?
-            - {{row["question_2"]}}
-            What are some things I can improve on as a gf?
-            - {{row["question_3"]}}
-            What are some things YOU can improve on?
-            - {{row["question_4"]}}
-            What are some things we don't do as much of anymore but you wish we did?
-            - {{row["question_5"]}}
-            What have been your top three moments in our relationship? 
-            - {{row["question_6"]}}
-            What is one thing you would change about our relationship if you could?
-            - {{row["question_7"]}}
-            How would you rate my:
-            Personality
-            - {{row["question_8_r1"]}}
-            Emotional well being
-            - {{row["question_8_r2"]}}
-            Cuteness
-            - {{row["question_8_r3"]}}
-            Humor
-            - {{row["question_8_r4"]}}
-            Coolness
-            - {{row["question_8_r5"]}}
-            When are you free? I wanna take you out on more dates :)
-            - {{' '.join(row["question_9"].split('T'))}}
-            Additional comments
-            - {{row["question_10"]}} 
+            {{ques_row["question_1"]}}
+            - {{ans_row["question_1"]}}
+            {{ques_row["question_2"]}}
+            - {{ans_row["question_2"]}}
+            {{ques_row["question_3"]}}
+            - {{ans_row["question_3"]}}
+            {{ques_row["question_4"]}}
+            - {{ans_row["question_4"]}}
+            {{ques_row["question_5"]}}
+            - {{ans_row["question_5"]}}
+            {{ques_row["question_6"]}} 
+            - {{ans_row["question_6"]}}
+            {{ques_row["question_7"]}}
+            - {{ans_row["question_7"]}}
+            {{ques_row["question_8_r1"].split(': ')[0]}}:
+            {{ques_row["question_8_r1"].split(': ')[1]}}
+            - {{ans_row["question_8_r1"]}}
+            {{ques_row["question_8_r2"].split(': ')[1]}}
+            - {{ans_row["question_8_r2"]}}
+            {{ques_row["question_8_r3"].split(': ')[1]}}
+            - {{ans_row["question_8_r3"]}}
+            {{ques_row["question_8_r4"].split(': ')[1]}}
+            - {{ans_row["question_8_r4"]}}
+            {{ques_row["question_8_r5"].split(': ')[1]}}
+            - {{ans_row["question_8_r5"]}}
+            {{ques_row["question_9"]}}
+            - {{' '.join(ans_row["question_9"].split('T'))}}
+            {{ques_row["question_10"]}}
+            - {{ans_row["question_10"]}} 
         </pre>
     </body>
 </html>

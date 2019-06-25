@@ -42,11 +42,21 @@ def password():
 
 @app.route('/surveyf')
 def survey_1_entry():
-    return render_template('survey_1.html')
+    con = sqlite3.connect("/home/lainofthewired/survey/database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute('SELECT * FROM questions_list_f')
+    row = cur.fetchone()
+    return render_template('survey_1.html', row=row)
 
 @app.route('/surveygf')
 def survey_2_entry():
-    return render_template('survey_2.html')
+    con = sqlite3.connect("/home/lainofthewired/survey/database.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute('SELECT * FROM questions_list_gf')
+    row = cur.fetchone()
+    return render_template('survey_2.html', row=row)
 
 
 @app.route('/addsurvey_1', methods = ['POST', 'GET'])
@@ -91,13 +101,15 @@ def add_data_1():
             con.row_factory = sqlite3.Row
             cur = con.cursor()
             cur.execute('SELECT * FROM survey_1 ORDER BY id DESC LIMIT 1')
-            row = cur.fetchone()
+            ans_row = cur.fetchone()
+            cur.execute('SELECT * FROM questions_list_f')
+            ques_row = cur.fetchone()
             try:
                 print(custom_email)
-                send_mail('Frenship Survey Response', custom_email, [row[3]],
-                            render_template('survey_1_email.html', row=row))
+                send_mail('Frenship Survey Response', custom_email, [ans_row[3]],
+                            render_template('survey_1_email.html', ans_row=ans_row, ques_row=ques_row))
                 send_mail('Frenship Survey Response', custom_email, [my_email],
-                            render_template('my_survey_1_email.html', row=row))
+                            render_template('my_survey_1_email.html', ans_row=ans_row, ques_row=ques_row))
             except Exception as e:
                 print('error in email: ' + str(e))
         finally:
@@ -147,11 +159,13 @@ def add_data_2():
             con.row_factory = sqlite3.Row
             cur = con.cursor()
             cur.execute('SELECT * FROM survey_2 ORDER BY id DESC LIMIT 1')
-            row = cur.fetchone()
-            send_mail('Relationship Survey Response', custom_email, [row[3]],
-                        render_template('survey_2_email.html', row=row))
+            ans_row = cur.fetchone()
+            cur.execute('SELECT * FROM questions_list_gf')
+            ques_row = cur.fetchone()
+            send_mail('Relationship Survey Response', custom_email, [ans_row[3]],
+                        render_template('survey_2_email.html', ans_row=ans_row, ques_row=ques_row))
             send_mail('Relationship Survey Response', custom_email, [my_email],
-                        render_template('my_survey_2_email.html', row=row))
+                        render_template('my_survey_2_email.html', ans_row=ans_row, ques_row=ques_row))
         finally:
             con.close()
             return render_template('closing.html')

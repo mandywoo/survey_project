@@ -99,45 +99,45 @@
                     </script>
 
                     <div class='labels'>
-                        <label id='q1-label' for="question_1">How are you? </label>
+                        <label id='q1-label' for="question_1">{{row["question_1"]}} </label>
                     </div>
                     <textarea name = "question_1" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q2-label' for="question_2">What do you think of our current frenship? </label>
+                        <label id='q2-label' for="question_2">{{row["question_2"]}} </label>
                     </div>
                     <textarea name = "question_2" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q3-label' for="question_3">What are some things I can improve on as a fren? </label>
+                        <label id='q3-label' for="question_3">{{row["question_3"]}} </label>
                     </div>
                     <textarea name = "question_3" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q4-label' for="question_4">What are some things YOU can improve on? </label>
+                        <label id='q4-label' for="question_4">{{row["question_4"]}} </label>
                     </div>
                     <textarea name = "question_4" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q5-label' for="question_5">What is your current favorite song? </label>
+                        <label id='q5-label' for="question_5">{{row["question_5"]}} </label>
                     </div>
                     <textarea name = "question_5" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q6-label' for="question_6">What have been your top three moments in our frenship? </label>
+                        <label id='q6-label' for="question_6">{{row["question_6"]}} </label>
                     </div>
                     <textarea name = "question_6" class="input-field-textarea" required></textarea>
 
                     <div class='labels'>
-                        <label id='q7-label' for="question_7">What is one thing you would change about our frenship if you could? </label>
+                        <label id='q7-label' for="question_7">{{row["question_7"]}} </label>
                     </div>
                     <textarea name = "question_7" class="input-field-textarea" required></textarea>
 
                     <br>
 
-                    <div class="rating-label">How would you rate my:<br></div>
+                    <div class="rating-label">{{row["question_8_r1"].split(': ')[0]}}:<br></div>
                     <div class='labels'>
-                        <label id='q8-r1-label' for="question_8_r1">Personality </label>
+                        <label id='q8-r1-label' for="question_8_r1">{{row["question_8_r1"].split(': ')[1]}} </label>
                     </div>
                     <select name = "question_8_r1" class="dropdown" required> 
                         <option value="" disabled selected>Select your option</option>
@@ -146,7 +146,7 @@
                         {% endfor %}   
                     </select>   
                     <div class='labels'>
-                        <label id='q8-r2-label' for="question_8_r2">Emotional Well-being </label>
+                        <label id='q8-r2-label' for="question_8_r2">{{row["question_8_r2"].split(': ')[1]}} </label>
                     </div>
                     <select name = "question_8_r2" class="dropdown" required>
                         <option value="" disabled selected>Select your option</option>
@@ -155,7 +155,7 @@
                         {% endfor %}   
                     </select> 
                     <div class='labels'>
-                        <label id='q8-r3-label' for="question_8_r3">Humor </label>
+                        <label id='q8-r3-label' for="question_8_r3">{{row["question_8_r3"].split(': ')[1]}} </label>
                     </div>
                     <select name = "question_8_r3" class="dropdown" required>
                         <option value="" disabled selected>Select your option</option>
@@ -164,7 +164,7 @@
                         {% endfor %}   
                     </select> 
                     <div class='labels'>
-                        <label id='q8-r4-label' for="question_8_r4">Coolness </label>
+                        <label id='q8-r4-label' for="question_8_r4">{{row["question_8_r4"].split(': ')[1]}} </label>
                     </div>
                     <select name = "question_8_r4" class="dropdown" required>
                         <option value="" disabled selected>Select your option</option>    
@@ -195,9 +195,9 @@
                     <br>
 
                     <div id="second-rating">
-                        <div class="rating-label">Too bad :P How would you rate my:<br></div>
+                        <div class="rating-label">Too bad :P {{row["question_8_r1"].split(': ')[0]}}:<br></div>
                         <div class='labels'>
-                            <label id='q8-r1-f-label' for="question_8_r1_f">Personality </label>
+                            <label id='q8-r1-f-label' for="question_8_r1_f">{{row["question_8_r1"].split(': ')[1]}} </label>
                         </div>
                         <select name = "question_8_r1_f" class="dropdown" required>
                             <option value="" disabled selected>Select your option</option>
@@ -206,7 +206,7 @@
                             {% endfor %}   
                         </select>   
                         <div class='labels'>
-                            <label id='q8-r2-f-label' for="question_8_r2_f">Emotional Well-being </label>
+                            <label id='q8-r2-f-label' for="question_8_r2_f">{{row["question_8_r2"].split(': ')[1]}} </label>
                         </div>
                         <select name = "question_8_r2_f" class="dropdown" required>
                             <option value="" disabled selected>Select your option</option>
@@ -215,7 +215,7 @@
                             {% endfor %}   
                         </select> 
                         <div class='labels'>
-                            <label id='q8-r3-f-label' for="question_8_r3_f">Humor </label>
+                            <label id='q8-r3-f-label' for="question_8_r3_f">{{row["question_8_r3"].split(': ')[1]}} </label>
                         </div>
                         <select name = "question_8_r3_f" class="dropdown" required>
                             <option value="" disabled selected>Select your option</option>
@@ -224,7 +224,7 @@
                             {% endfor %}   
                         </select> 
                         <div class='labels'>
-                            <label id='q8-r4-f-label' for="question_8_r4_f">Coolness </label>
+                            <label id='q8-r4-f-label' for="question_8_r4_f">{{row["question_8_r4"].split(': ')[1]}} </label>
                         </div>
                         <select name = "question_8_r4_f" class="dropdown" required>
                             <option value="" disabled selected>Select your option</option>    
@@ -277,12 +277,12 @@
                     </script>
 
                     <div class='labels'>
-                        <label id='q9-label' for="question_9">When are you free? We should go out to eat some time. </label>
+                        <label id='q9-label' for="question_9">{{row["question_9"]}} </label>
                     </div>           
                     <input type="datetime-local" name="question_9" class="input-field" id="date-time-field" onfocus="setMinTime(); this.onfocus=null;" onblur="validateDateTime()" required></br>
 
                     <div class='labels'>
-                        <label id='q10-label' for="question_10">Additional comments </label>
+                        <label id='q10-label' for="question_10">{{row["question_10"]}} </label>
                     </div>           
                     <textarea name="question_10" class="input-field-textarea" required></textarea></br>
                     <p>
