@@ -270,7 +270,7 @@
                             today = yyyy+'-'+mm+'-'+dd+'T'+'12:00:00.000';
                             var inputDateTime = document.getElementById("date-time-field");
                             if (new Date(today).getTime() > new Date(inputDateTime.value).getTime()){
-                                alert("Pls put in a reasonable time and date. Meaning anytime after 12pm tomorrow...");
+                                alert("Pls put in a reasonable time and date. Meaning anytime after tomorrow...");
                                 inputDateTime.value = "";
                             }
                         }
@@ -279,8 +279,23 @@
                     <div class='labels'>
                         <label id='q9-label' for="question_9">{{row["question_9"]}} </label>
                     </div>           
-                    <input type="datetime-local" name="question_9" class="input-field" id="date-time-field" onfocus="setMinTime(); this.onfocus=null;" onblur="validateDateTime()" required></br>
+                    <!-- <input type="datetime-local" name="question_9" class="input-field" id="date-time-field" onfocus="setMinTime(); this.onfocus=null;" onblur="validateDateTime()" required></br> -->
+                    <input type="date" name="question_9" class="input-field" id="date-time-field" min="2000-06-09" max="2100-12-31" onblur="validateDateTime()">
 
+                    <script>
+                        var date = new Date();
+
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+
+                        if (month < 10) month = "0" + month;
+                        if (day < 10) day = "0" + day;
+
+                        var today = year + "-" + month + "-" + day;
+                        document.getElementById("date-time-field").value = today;
+                    </script>
+                    
                     <div class='labels'>
                         <label id='q10-label' for="question_10">{{row["question_10"]}} </label>
                     </div>           
